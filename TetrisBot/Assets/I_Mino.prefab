@@ -174,6 +174,12 @@ MonoBehaviour:
   minoSpawner: {fileID: 0}
   rotationDirection: 0
   ID: 0
+  timeToFall: 1
+  timeTillFall: 0
+  timeForFullMove: 0.15
+  timeHealdKeyDown: 0
+  moveRight: 0
+  dropClone: {fileID: 0}
 --- !u!212 &212065952911617674
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -442,6 +442,39 @@ GameObject:
   m_PrefabParentObject: {fileID: 1791682205921932, guid: bfbe0bf37cc15415889c9f3500ad034c,
     type: 2}
   m_PrefabInternal: {fileID: 659432249}
+--- !u!4 &1653159509 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4583568867089600, guid: bfbe0bf37cc15415889c9f3500ad034c,
+    type: 2}
+  m_PrefabInternal: {fileID: 659432249}
+--- !u!1 &1694365242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1694365243}
+  m_Layer: 0
+  m_Name: DropLocation
+  m_TagString: DropLocation
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1694365243
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694365242}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1653159509}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1701670136
 GameObject:
   m_ObjectHideFlags: 0

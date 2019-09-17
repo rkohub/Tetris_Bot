@@ -8,10 +8,8 @@ public class Mino_Board : MonoBehaviour {
 //	public bool[][] ocupied = new bool[20][];
 	public bool[,] ocupied = new bool[23,10];
 	public bool spaceIsOpen;
-
 	public Vector2[,] wallKickData = new Vector2[4,5];
 	public Vector2[,] wallKickDataI = new Vector2[4,5];
-
 
 	// Use this for initialization
 	void Start () {

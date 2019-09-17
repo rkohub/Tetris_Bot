@@ -10,13 +10,21 @@ public class MinoController : MonoBehaviour {
 	public int ID;
 	public float timeToFall = 1.0f;
 	public float timeTillFall;
-	public float timeForFullMove = 0.1f;
+	public float timeForFullMove;// = 0.25f;
 	public float timeHealdKeyDown;
 	public bool moveRight;
+	public GameObject dropClone;
 
 	// Use this for initialization
 	void Start () {
 		rotationDirection = 0;
+		for (int i = 0; i < this.gameObject.transform.parent.gameObject.transform.childCount; i++) {
+			//print (this.gameObject.transform.parent.gameObject.transform.GetChild (i));
+			if (this.gameObject.transform.parent.gameObject.transform.GetChild (i).gameObject.tag == "DropLocation") {
+				dropClone = this.gameObject.transform.parent.gameObject.transform.GetChild (i).gameObject;
+			}
+		}
+		updateGhost ();
 	}
 	
 	// Update is called once per frame
@@ -38,12 +46,14 @@ public class MinoController : MonoBehaviour {
 			oldNum = rotationDirection;
 			rotationDirection = (rotationDirection + 3) % 4;
 			this.gameObject.GetComponentInParent<Mino_Board> ().rotate (oldNum, rotationDirection, this.gameObject, false);
+			updateGhost ();
 		}
 		if (Input.GetKeyDown (KeyCode.L)) {
 			this.gameObject.transform.eulerAngles += new Vector3 (0, 0, -90);
 			oldNum = rotationDirection;
 			rotationDirection = (rotationDirection + 1) % 4;
 			this.gameObject.GetComponentInParent<Mino_Board> ().rotate (oldNum, rotationDirection, this.gameObject, true);
+			updateGhost ();
 		}
 		if (Input.GetKeyDown (KeyCode.D)) {
 			timeHealdKeyDown = 0;
@@ -52,6 +62,7 @@ public class MinoController : MonoBehaviour {
 			if (!validLocation ()) {
 				this.gameObject.transform.position += new Vector3 (-1, 0, 0);
 			}
+			updateGhost ();
 		}
 		if (Input.GetKey (KeyCode.D) && moveRight) {
 			timeHealdKeyDown += Time.deltaTime;
@@ -63,6 +74,7 @@ public class MinoController : MonoBehaviour {
 			if (!validLocation ()) {
 				this.gameObject.transform.position += new Vector3 (1, 0, 0);
 			}
+			updateGhost ();
 		}
 		if (Input.GetKey (KeyCode.A) && !moveRight) {
 			timeHealdKeyDown += Time.deltaTime;
@@ -75,6 +87,7 @@ public class MinoController : MonoBehaviour {
 					if (!validLocation ()) {
 						this.gameObject.transform.position += new Vector3 (-1, 0, 0);
 						timeHealdKeyDown = 0;
+						updateGhost ();
 						break;
 					}
 				}
@@ -84,6 +97,7 @@ public class MinoController : MonoBehaviour {
 					if (!validLocation ()) {
 						this.gameObject.transform.position += new Vector3 (1, 0, 0);
 						timeHealdKeyDown = 0;
+						updateGhost ();
 						break;
 					}
 				}
@@ -119,5 +133,18 @@ public class MinoController : MonoBehaviour {
 
 	public bool validLocation(){
 		return this.gameObject.transform.GetComponentInParent<Mino_Board> ().isCurrentSpaceOK (this.gameObject);
+	}
+
+	public void updateGhost(){
+		for (int i = dropClone.gameObject.transform.childCount-1; i >= 0; i--) {
+			Destroy(dropClone.gameObject.transform.GetChild(i).gameObject);
+		}
+		GameObject ghost = Instantiate(this.gameObject, this.gameObject.transform.position, this.gameObject.transform.rotation, dropClone.transform);
+		MinoController m = ghost.GetComponent<MinoController> ();
+		Destroy (m);
+		while (this.gameObject.transform.GetComponentInParent<Mino_Board> ().isCurrentSpaceOK (ghost)) {
+			ghost.gameObject.transform.position += new Vector3(0, -1, 0);
+		}
+		ghost.gameObject.transform.position += new Vector3(0, 1, 0);
 	}
 }

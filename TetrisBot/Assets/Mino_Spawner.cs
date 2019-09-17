@@ -13,6 +13,8 @@ public class Mino_Spawner : MonoBehaviour {
 	public bool gameOver;
 	bool[] spawnedMinos =  new bool[7];
 	int[] nextMinoes = new int[7];
+	public int holdNum;
+	public bool isHolding;
 
 	// Use this for initialization
 	void Start () {
@@ -49,10 +51,11 @@ public class Mino_Spawner : MonoBehaviour {
 				} else {
 					activeMino.GetComponent<MinoController> ().minoSpawner = this.gameObject;
 				}
-
+//				activeMino.GetComponent<MinoController> ().updateGhost ();
 				// else {
 //					minoBoard.GetComponent<Mino_Board> ().removeCurrentSpot (activeMino);
 //				}
+
 			} 
 			if (Input.GetKeyDown (KeyCode.N)) {
 				minoIsSpawned = false;
